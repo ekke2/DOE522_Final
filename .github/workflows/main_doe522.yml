@@ -57,7 +57,7 @@ jobs:
         uses: ./
         id: code-analysis
         with:
-          project: .\DOE_FA1_Nico_Coetzee.sln
+          project: DOE_FA1_Nico_Coetzee.sln
           build-breaking: false
           all-categories: all
 
@@ -73,6 +73,8 @@ jobs:
           body: 'The testing has failed. Check the logs for more information.'
           to: 'acoetzee458@gmail.com'
           from: 'adriaancoetzee2004@gmail.com'
+
+      
   
       # Upload the analysis results file
       - name: Upload analysis results
