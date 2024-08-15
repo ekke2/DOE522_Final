@@ -54,12 +54,7 @@ jobs:
         run: dotnet test --no-restore --collect:"XPlat Code Coverage"
 
       - name: Run .NET Code Analysis
-        uses: ./
-        id: code-analysis
-        with:
-          project: DOE_FA1_Nico_Coetzee.sln
-          build-breaking: false
-          all-categories: all
+        run: dotnet format ./DOE_FA1_Nico_Coetzee.sln --verify-no-changes --verbosity diag
 
       - name: Notify on failure via email
         if: failure()
