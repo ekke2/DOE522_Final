@@ -53,8 +53,33 @@ jobs:
       - name: Run unit tests
         run: dotnet test --no-restore --collect:"XPlat Code Coverage"
 
-      - name: Run code analysis
-        run: dotnet tool run dotnet-format
+      - name: Run .NET Code Analysis
+        uses: ./
+        id: code-analysis
+        with:
+          project: .\DOE_FA1_Nico_Coetzee.sln
+          build-breaking: false
+          all-categories: all
+
+      - name: Notify on failure via email
+        if: failure()
+        uses: dawidd6/action-send-mail@v4
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: 'Deployment Failed'
+          body: 'The testing has failed. Check the logs for more information.'
+          to: 'acoetzee458@gmail.com'
+          from: 'adriaancoetzee2004@gmail.com'
+  
+      # Upload the analysis results file
+      - name: Upload analysis results
+        uses: actions/upload-artifact@v4
+        with:
+          name: analysis_results.sarif
+          path: ${{ steps.code-analysis.outputs.sarifFile }}
 
   deploy:
     runs-on: ubuntu-latest
