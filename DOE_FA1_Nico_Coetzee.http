@@ -1,0 +1,6 @@
+@DOE_FA1_Nico_Coetzee_HostAddress = http://localhost:5142
+
+GET {{DOE_FA1_Nico_Coetzee_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
