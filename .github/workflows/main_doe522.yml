@@ -63,7 +63,7 @@ jobs:
 
       - name: Notify on failure via email
         if: failure()
-        uses: dawidd6/action-send-mail@v4
+        uses: dawidd6/action-send-mail@v2
         with:
           server_address: smtp.gmail.com
           server_port: 587
@@ -113,7 +113,7 @@ jobs:
 
       - name: Notify on failure via email
         if: failure()
-        uses: dawidd6/action-send-mail@v4
+        uses: dawidd6/action-send-mail@v2
         with:
           server_address: smtp.gmail.com
           server_port: 587
