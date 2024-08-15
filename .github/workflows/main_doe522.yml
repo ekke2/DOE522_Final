@@ -72,11 +72,11 @@ jobs:
       
   
       # Upload the analysis results file
-      - name: Upload analysis results
+      - name: Upload code analysis results
         uses: actions/upload-artifact@v4
         with:
-          name: analysis_results.sarif
-          path: ${{ steps.code-analysis.outputs.sarifFile }}
+          name: analysis-results
+          path: '**/format.sarif'
 
   deploy:
     runs-on: ubuntu-latest
