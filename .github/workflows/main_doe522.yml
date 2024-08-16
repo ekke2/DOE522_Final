@@ -33,6 +33,19 @@ jobs:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
 
+      - name: Notify on failure via email
+        if: failure()
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: 'Build Failed'
+          body: 'The build has failed. Check the logs for more information.'
+          to: 'acoetzee458@gmail.com'
+          from: 'adriaancoetzee2004@gmail.com'
+
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -64,7 +77,7 @@ jobs:
           server_port: 587
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: 'Deployment Failed'
+          subject: 'Testing Failed'
           body: 'The testing has failed. Check the logs for more information.'
           to: 'acoetzee458@gmail.com'
           from: 'adriaancoetzee2004@gmail.com'
